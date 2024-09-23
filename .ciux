@@ -1,0 +1,9 @@
+apiVersion: v1alpha1
+dependencies:
+  - package: github.com/k8s-school/ink@v0.0.1-rc5
+    labels:
+      e2e: "true"
+  - package: github.com/k8s-school/ktbx@v1.1.3-rc9
+    labels:
+      e2e: "optional"
+
