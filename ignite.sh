@@ -11,4 +11,4 @@ DIR=$(cd "$(dirname "$0")"; pwd -P)
 ciux_version=v0.0.4-rc8
 go install github.com/k8s-school/ciux@"$ciux_version"
 
-ciux ignite -l e2e
+ciux ignite -l e2e "$DIR"
