@@ -13,6 +13,9 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+        # Required by ciux
+        with:
+          fetch-depth: 0
       - name: Stop apparmor
         run: |
           sudo /etc/init.d/apparmor stop
