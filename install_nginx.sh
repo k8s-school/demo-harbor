@@ -8,6 +8,8 @@ set -euxo pipefail
 
 DIR=$(cd "$(dirname "$0")"; pwd -P)
 
+. $DIR/conf.sh
+
 # Get master node IP
 node1_ip=$(kubectl get nodes -o=jsonpath='{.items[0].status.addresses[0].address}')
 
