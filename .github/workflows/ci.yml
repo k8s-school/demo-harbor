@@ -1,6 +1,6 @@
 # Qserv operator CI workflow
 ---
-name: "CI"
+name: "e2e tests"
 on:
   push:
   pull_request:
@@ -8,7 +8,7 @@ on:
       - master
 jobs:
   main:
-    name: Run nginx-controller demo
+    name: Run Harbor demo
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout code
