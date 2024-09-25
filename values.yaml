@@ -222,8 +222,8 @@ persistence:
       regionendpoint: https://minio.minio:443
       #encrypt: false
       #keyid: mykeyid
-      secure: false 
-      #skipverify: false
+      #secure: true
+      skipverify: true
       #v4auth: true
       #chunksize: "5242880"
       #rootdirectory: /s3/object/name/prefix
