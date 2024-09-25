@@ -1,0 +1,14 @@
+s3:
+  bucket: harbor 
+  endpoint: https://minio.minio:443
+e2e:
+  # Install applications required by fink for end-to-end testing:
+  # minio-operator, minio-tenant, fink-alert-simulator
+  # strimzi, kafka-cluster
+  enabled: true
+spec:
+  destination:
+    server: https://kubernetes.default.svc
+  sparkNamespace: spark
+  source:
+    repoURL: https://github.com/k8s-school/demo-harbor/cd

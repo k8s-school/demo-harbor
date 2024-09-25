@@ -1,0 +1,36 @@
+{{ if .Values.e2e.enabled }}
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: minio-tenant
+  namespace: argocd
+  labels:
+    app.kubernetes.io/name: minio-tenant
+    app.kubernetes.io/part-of: harbor-registry 
+    app.kubernetes.io/component: storage
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    chart: tenant
+    repoURL: https://operator.min.io/
+    targetRevision: 5.0.10
+    helm:
+      releaseName: minio-tenant
+      # see https://min.io/docs/minio/kubernetes/upstream/reference/tenant-chart-values.html#minio-tenant-chart-values
+      valuesObject:
+        tenant:
+          name: minio
+          pools:
+            - servers: 2
+          buckets:
+            - name: {{ .Values.s3.bucket }}
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: minio
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+      - ApplyOutOfSyncOnly=true
+{{ end }}

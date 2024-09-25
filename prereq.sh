@@ -15,4 +15,9 @@ ktbx install kubectl
 ktbx install helm
 ink "Create kind cluster"
 ktbx create -s --name $cluster_name
+ink "Install OLM"
+ktbx install olm
+ink "Install ArgoCD operator"
+ktbx install argocd
+
 

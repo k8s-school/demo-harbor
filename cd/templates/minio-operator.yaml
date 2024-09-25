@@ -1,0 +1,28 @@
+{{ if .Values.e2e.enabled }}
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: minio-operator
+  namespace: argocd
+  labels:
+    app.kubernetes.io/name: minio-operator
+    app.kubernetes.io/part-of: fink
+    app.kubernetes.io/component: operator
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    chart: operator
+    repoURL: https://operator.min.io/
+    targetRevision: 5.0.10
+    helm:
+      releaseName: minio-operator
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: minio-operator
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+      - ApplyOutOfSyncOnly=true
+{{ end }}

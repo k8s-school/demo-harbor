@@ -182,7 +182,7 @@ persistence:
     # Refer to
     # https://github.com/distribution/distribution/blob/main/docs/configuration.md#redirect
     # for the detail.
-    disableredirect: false
+    disableredirect: true
     # Specify the "caBundleSecretName" if the storage service uses a self-signed certificate.
     # The secret must contain keys named "ca.crt" which will be injected into the trust store
     # of registry's containers.
@@ -216,10 +216,10 @@ persistence:
       # keys in the secret should be REGISTRY_STORAGE_S3_ACCESSKEY and REGISTRY_STORAGE_S3_SECRETKEY for registry
       #existingSecret: ""
       region: us-west-1
-      bucket: bucketname
+      bucket: harbor
       #accesskey: awsaccesskey
       #secretkey: awssecretkey
-      #regionendpoint: http://myobjects.local
+      regionendpoint: https://minio.minio:443
       #encrypt: false
       #keyid: mykeyid
       #secure: true
