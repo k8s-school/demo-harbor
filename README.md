@@ -24,3 +24,21 @@ Harbor demo
 # Display connection information
 ./install_harbor.sh
 ```
+
+
+# Test (WIP)
+
+```bash
+# Simulate load-balancer
+sudo $(which txeh) add 127.0.0.1 "$harbor_domain"
+sudo socat tcp-listen:80,reuseaddr,fork tcp:172.18.0.2:32002
+sudo socat tcp-listen:443,reuseaddr,fork tcp:172.18.0.2:32625
+
+# Create image
+sudo apt install podman
+# User: admin:, pass: Harbor12345
+podman login --tls-verify=false core.harbor.domain/library
+podman pull ubuntu:latest
+podman tag ubuntu:latest core.harbor.domain/library/ubuntu:latest
+podman push --tls-verify=false core.harbor.domain/library/ubuntu:latest
+```

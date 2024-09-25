@@ -222,7 +222,7 @@ persistence:
       regionendpoint: https://minio.minio:443
       #encrypt: false
       #keyid: mykeyid
-      #secure: true
+      secure: false 
       #skipverify: false
       #v4auth: true
       #chunksize: "5242880"
