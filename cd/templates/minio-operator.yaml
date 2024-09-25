@@ -6,7 +6,7 @@ metadata:
   namespace: argocd
   labels:
     app.kubernetes.io/name: minio-operator
-    app.kubernetes.io/part-of: fink
+    app.kubernetes.io/part-of: harbor-registry
     app.kubernetes.io/component: operator
   finalizers:
   - resources-finalizer.argocd.argoproj.io

@@ -22,3 +22,12 @@ argocd app create harbor-registry --dest-server https://kubernetes.default.svc \
     --path cd
 
 argocd app sync harbor-registry
+
+# Synk operators dependency for harbor-registry
+argocd app sync -l app.kubernetes.io/part-of=harbor-registry,app.kubernetes.io/component=operator
+argocd app wait -l app.kubernetes.io/part-of=harbor-registry,app.kubernetes.io/component=operator
+
+# Synk storage dependency for harbor-registry
+argocd app sync -l app.kubernetes.io/part-of=harbor-registry,app.kubernetes.io/component=storage
+argocd app wait -l app.kubernetes.io/part-of=harbor-registry,app.kubernetes.io/component=storage
+
