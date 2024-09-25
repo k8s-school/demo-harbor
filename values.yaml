@@ -191,7 +191,7 @@ persistence:
     # Specify the type of storage: "filesystem", "azure", "gcs", "s3", "swift",
     # "oss" and fill the information needed in the corresponding section. The type
     # must be "filesystem" if you want to use persistent volumes for registry
-    type: filesystem
+    type: s3
     filesystem:
       rootdirectory: /storage
       #maxthreads: 100
@@ -217,8 +217,8 @@ persistence:
       #existingSecret: ""
       region: us-west-1
       bucket: harbor
-      #accesskey: awsaccesskey
-      #secretkey: awssecretkey
+      accesskey: minio
+      secretkey: minio123
       regionendpoint: https://minio.minio:443
       #encrypt: false
       #keyid: mykeyid

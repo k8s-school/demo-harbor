@@ -10,9 +10,15 @@ DIR=$(cd "$(dirname "$0")"; pwd -P)
 
 . $DIR/conf.sh
 
+namespace="harbor"
+
+
+# NOTE: This command will retrieve the chart locally and may help while troubleshooting:
+# helm fetch harbor/harbor --untar --version 1.15.1
+
 ink "Install Harbor"
 helm repo add harbor https://helm.goharbor.io
-helm upgrade --install harbor-csan harbor/harbor --version $harbor_chart_version -f $DIR/values.yaml
+helm upgrade --install harbor-csan harbor/harbor --version $harbor_chart_version -n "$namespace" --create-namespace -f $DIR/values.yaml
 
 # Warn: might not always work because it assummes the https port is the second one
 node_port=$(kubectl get svc ingress-nginx-controller -n "$ingress_ns"  -o jsonpath="{.spec.ports[1].nodePort}")
