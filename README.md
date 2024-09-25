@@ -34,6 +34,19 @@ sudo $(which txeh) add 127.0.0.1 "$harbor_domain"
 sudo socat tcp-listen:80,reuseaddr,fork tcp:172.18.0.2:32002
 sudo socat tcp-listen:443,reuseaddr,fork tcp:172.18.0.2:32625
 
+
+# TODO fix it  using values.yaml
+kubectl edit -n harbor cm harbor-csan-registry
+# add skipverify:
+    #   s3:
+    #     region: us-west-1
+    #     bucket: harbor
+    #     regionendpoint: https://minio.minio:443
+    #     skipverify: true
+
+# Restart pod
+kubectl delete pod -n harbor harbor-csan-registry-6c945bcb45-ll8gj
+
 # Create image
 sudo apt install podman
 # User: admin:, pass: Harbor12345
