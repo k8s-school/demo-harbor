@@ -1,5 +1,8 @@
 # demo-harbor
-Harbor demo
+
+Harbor inside Kubernetes demo
+
+Harbor is exposed through ingress (`nginx-controller`) and store image in `minio` using `s3` protocol.
 
 ## Pre-requisites
 
@@ -7,12 +10,18 @@ Harbor demo
 - Sudo access
 - Docker (24.0.6+)
 - Go (1.22.5+)
+- socat
+- podman (for e2e tests)
 
-## Run
+## Install the whole stack from scratch
 
 ```bash
-# Install dependencies (kind, helm, ...)
-./ignite.s
+
+# Install packages
+sudo apt install socat podman
+
+# Install other dependencies (kind, helm, ...)
+./ignite.sh
 
 # Bootstrap Kubernetes cluster
 ./prereq.sh
@@ -20,38 +29,25 @@ Harbor demo
 # Install and configure nginx-controller
 ./install_nginx.sh
 
+# Configure load-balancer
+./loadbalancer.sh
+
 # Install and configure Harbor
 # Display connection information
 ./install_harbor.sh
 ```
 
 
-# Test (WIP)
+## e2e tests
 
 ```bash
-# Simulate load-balancer
-sudo $(which txeh) add 127.0.0.1 "$harbor_domain"
-sudo socat tcp-listen:80,reuseaddr,fork tcp:172.18.0.2:32002
-sudo socat tcp-listen:443,reuseaddr,fork tcp:172.18.0.2:32625
+# Create and push image
+./push-image.sh
+```
 
+## Interactive access to S3 storage
 
-# TODO fix it  using values.yaml
-kubectl edit -n harbor cm harbor-csan-registry
-# add skipverify:
-    #   s3:
-    #     region: us-west-1
-    #     bucket: harbor
-    #     regionendpoint: https://minio.minio:443
-    #     skipverify: true
-
-# Restart pod
-kubectl delete pod -n harbor harbor-csan-registry-6c945bcb45-ll8gj
-
-# Create image
-sudo apt install podman
-# User: admin:, pass: Harbor12345
-podman login --tls-verify=false core.harbor.domain/library
-podman pull ubuntu:latest
-podman tag ubuntu:latest core.harbor.domain/library/ubuntu:latest
-podman push --tls-verify=false core.harbor.domain/library/ubuntu:latest
+```shell
+kubectl run -it --rm s5cmd --image=peakcom/s5cmd --env AWS_ACCESS_KEY_ID=minio --env  AWS_SECRET_ACCESS_KEY=minio123 --env S3_ENDPOINT_URL=https://minio.minio:443 --command -- sh
+/s5cmd --log debug --no-verify-ssl ls "s3://harbor/*"
 ```
