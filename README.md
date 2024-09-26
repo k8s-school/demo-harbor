@@ -4,6 +4,8 @@ Harbor inside Kubernetes demo
 
 Harbor is exposed through ingress (`nginx-controller`) and store image in `minio` using `s3` protocol.
 
+![Harbor demo architecture](demo-harbor.png)
+
 ## Pre-requisites
 
 - Linux (tested on Ubuntu 224.04)
@@ -25,6 +27,9 @@ sudo apt install socat podman
 
 # Bootstrap Kubernetes cluster
 ./prereq.sh
+
+# Install Minio
+./argocd.sh
 
 # Install and configure nginx-controller
 ./install_nginx.sh

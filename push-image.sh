@@ -6,13 +6,15 @@
 
 set -euxo pipefail
 
+image="alpine:latest"
+
 sudo apt install podman
 # User: admin:, pass: Harbor12345
 podman login --tls-verify=false core.harbor.domain/library
 
 # Create image
-podman pull ubuntu:latest
-podman tag ubuntu:latest core.harbor.domain/library/ubuntu:latest
+podman pull "$image"
+podman tag "$image" "core.harbor.domain/library/$image"
 
 # Push image
-podman push --tls-verify=false core.harbor.domain/library/ubuntu:latest
+podman push --tls-verify=false "core.harbor.domain/library/$image"
