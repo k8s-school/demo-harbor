@@ -18,5 +18,5 @@ namespace="harbor"
 
 ink "Install Harbor"
 helm repo add harbor https://helm.goharbor.io
-helm upgrade --install harbor-csan harbor/harbor --version $harbor_chart_version -n "$namespace" --create-namespace -f $DIR/values.yaml
+helm upgrade --wait --install harbor-csan harbor/harbor --version $harbor_chart_version -n "$namespace" --create-namespace -f $DIR/values.yaml
 
