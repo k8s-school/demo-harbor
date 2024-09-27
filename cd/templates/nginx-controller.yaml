@@ -1,0 +1,33 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: ingress-nginx
+  namespace: argocd
+  labels:
+    app.kubernetes.io/name: ingress-nginx
+    app.kubernetes.io/part-of: harbor-registry
+    app.kubernetes.io/component: ingress
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    chart: ingress-nginx
+    repoURL: https://kubernetes.github.io/ingress-nginx
+    targetRevision: 4.11.2
+    helm:
+      releaseName: ingress-nginx
+      valuesObject:
+        controller:
+          setAsDefaultIngress: true
+          service:
+            type: NodePort
+  destination:
+    server: {{ .Values.spec.destination.server }}
+    namespace: ingress-nginx
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+      # See https://github.com/argoproj/argo-cd/issues/820 and https://github.com/argoproj/argo-cd/issues/13100
+      - ServerSideApply=true
+      - ApplyOutOfSyncOnly=true

@@ -9,7 +9,6 @@ set -euxo pipefail
 DIR=$(cd "$(dirname "$0")"; pwd -P)
 
 $DIR/prereq.sh
-$DIR/install_nginx.sh
-$DIR/loadbalancer.sh
 $DIR/argocd.sh
+$DIR/loadbalancer.sh
 $DIR/install_harbor.sh
