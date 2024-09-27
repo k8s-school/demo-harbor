@@ -20,7 +20,3 @@ ink "Install Harbor"
 helm repo add harbor https://helm.goharbor.io
 helm upgrade --install harbor-csan harbor/harbor --version $harbor_chart_version -n "$namespace" --create-namespace -f $DIR/values.yaml
 
-harbor_url="https://$harbor_domain"
-curl -k -L "$harbor_url"
-
-ink "Login in to Harbor at URL $harbor_url with creds 'admin/Harbor12345'"

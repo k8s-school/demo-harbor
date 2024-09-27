@@ -23,3 +23,8 @@ sudo socat tcp-listen:443,reuseaddr,fork tcp:$node_ip:$https_node_port &
 # Configure DNS
 sudo $(which txeh) remove host "$harbor_domain"
 sudo $(which txeh) add 127.0.0.1 "$harbor_domain"
+
+ink "Login in to Harbor at URL $harbor_url with creds 'admin/Harbor12345'"
+harbor_url="https://$harbor_domain"
+curl -k -L "$harbor_url"
+
