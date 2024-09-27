@@ -9,7 +9,7 @@ on:
 jobs:
   main:
     name: Run Harbor demo
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -28,9 +28,12 @@ jobs:
       - name: Create k8s/kind cluster
         run: |
           ./prereq.sh
-      - name: Install nginx-controller
+      - name: Run argocd
         run: |
-          ./install_nginx.sh
+          ./argocd.sh
       - name: Install harbor
         run: |
           ./install_harbor.sh
+      - name: Push image
+        run: |
+          ./push-image.sh

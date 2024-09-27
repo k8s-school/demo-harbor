@@ -6,15 +6,27 @@
 
 set -euxo pipefail
 
+DIR=$(cd "$(dirname "$0")"; pwd -P)
+
+. $DIR/conf.sh
+
 image="alpine:latest"
 
-sudo apt install podman
-# User: admin:, pass: Harbor12345
-podman login --tls-verify=false core.harbor.domain/library
+# Check if podman is installed
+if ! command -v podman &> /dev/null
+then
+    echo "podman could not be found and will be installed"
+    sudo apt install podman
+fi
+
+podman login --tls-verify=false \
+    --username="$harbor_username" \
+    --password="$harbor_password" \
+    $harbor_domain/library
 
 # Create image
 podman pull "$image"
-podman tag "$image" "core.harbor.domain/library/$image"
+podman tag "$image" "$harbor_domain/library/$image"
 
 # Push image
-podman push --tls-verify=false "core.harbor.domain/library/$image"
+podman push --tls-verify=false "$harbor_domain/library/$image"
