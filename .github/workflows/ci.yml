@@ -31,6 +31,9 @@ jobs:
       - name: Run argocd
         run: |
           ./argocd.sh
+      - name: Create load balancer
+        run: |
+          ./loadbalancer.sh
       - name: Install harbor
         run: |
           ./install_harbor.sh
