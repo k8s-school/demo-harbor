@@ -17,6 +17,13 @@ https_node_port=$(kubectl get svc ingress-nginx-controller -n "$ingress_ns"  -o 
 # Get master node IP
 node_ip=$(kubectl get nodes -o=jsonpath='{.items[0].status.addresses[0].address}')
 
+# Check if podman is installed
+if ! command -v socat &> /dev/null
+then
+    echo "socat could not be found and will be installed"
+    sudo apt install socat
+fi
+
 sudo socat tcp-listen:80,reuseaddr,fork tcp:$node_ip:$http_node_port &
 sudo socat tcp-listen:443,reuseaddr,fork tcp:$node_ip:$https_node_port &
 
