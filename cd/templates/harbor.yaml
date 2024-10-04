@@ -1,0 +1,33 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: harbor
+  namespace: argocd
+  labels:
+    app.kubernetes.io/name: harbor
+    app.kubernetes.io/part-of: harbor-registry
+    app.kubernetes.io/component: core
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  sources:
+    - chart: harbor
+      repoURL: https://helm.goharbor.io/harbor
+      targetRevision: 1.15.1
+      helm:
+        releaseName: harbor-registry
+        valueFiles:
+          - $values/values.yaml
+    - repoURL: 'https://github.com/k8s-school/demo-harbor.git'
+      targetRevision: main
+      ref: values
+  destination:
+    server: {{ .Values.spec.destination.server }}
+    namespace: ingress-nginx
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+      # See https://github.com/argoproj/argo-cd/issues/820 and https://github.com/argoproj/argo-cd/issues/13100
+      - ServerSideApply=true
+      - ApplyOutOfSyncOnly=true
