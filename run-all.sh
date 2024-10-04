@@ -11,5 +11,4 @@ DIR=$(cd "$(dirname "$0")"; pwd -P)
 $DIR/prereq.sh
 $DIR/argocd.sh
 $DIR/loadbalancer.sh
-$DIR/install_harbor.sh
 $DIR/push-image.sh

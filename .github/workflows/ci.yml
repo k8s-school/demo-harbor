@@ -34,9 +34,6 @@ jobs:
       - name: Create load balancer
         run: |
           ./loadbalancer.sh
-      - name: Install harbor
-        run: |
-          ./install_harbor.sh
       - name: Push image
         run: |
           ./push-image.sh
