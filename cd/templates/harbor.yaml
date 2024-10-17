@@ -25,6 +25,11 @@ spec:
   destination:
     server: {{ .Values.spec.destination.server }}
     namespace: harbor
+  ignoreDifferences:
+  - group: ''
+    kind: 'Secret'
+    jsonPointers:
+    - /data
   syncPolicy:
     syncOptions:
       - CreateNamespace=true
