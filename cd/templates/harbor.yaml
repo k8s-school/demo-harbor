@@ -24,10 +24,9 @@ spec:
       ref: values
   destination:
     server: {{ .Values.spec.destination.server }}
-    namespace: ingress-nginx
+    namespace: harbor
   syncPolicy:
     syncOptions:
       - CreateNamespace=true
       # See https://github.com/argoproj/argo-cd/issues/820 and https://github.com/argoproj/argo-cd/issues/13100
-      - ServerSideApply=true
       - ApplyOutOfSyncOnly=true
