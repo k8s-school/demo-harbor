@@ -28,18 +28,11 @@ sudo apt install socat podman
 # Bootstrap Kubernetes cluster
 ./prereq.sh
 
-# Install Minio
+# Install and configure Minio, nginx-controller, Harbor
 ./argocd.sh
-
-# Install and configure nginx-controller
-./install_nginx.sh
 
 # Configure load-balancer
 ./loadbalancer.sh
-
-# Install and configure Harbor
-# Display connection information
-./install_harbor.sh
 ```
 
 
