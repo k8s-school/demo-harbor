@@ -21,7 +21,11 @@ do
 done
 
 ink "Wait for minio s3 bucket 'harbor' to exist"
-kubectl run  s5cmd --env AWS_ACCESS_KEY_ID=minio --env  AWS_SECRET_ACCESS_KEY=minio123 --env S3_ENDPOINT_URL=https://minio.minio:443 --command -- sleep infinity
+kubectl run  s5cmd  --image=peakcom/s5cmd \
+  --env AWS_ACCESS_KEY_ID=minio \
+  --env AWS_SECRET_ACCESS_KEY=minio123 \
+  --env S3_ENDPOINT_URL=https://minio.minio:443 \
+  --command -- sleep infinity
 
 while true
 do
