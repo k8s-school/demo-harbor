@@ -18,5 +18,7 @@ do
   sleep 5
 done
 
-
+# Wait for minio to be ready
+# TODO: why wait so long?
+sleep 30
 
