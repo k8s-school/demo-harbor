@@ -11,4 +11,5 @@ DIR=$(cd "$(dirname "$0")"; pwd -P)
 $DIR/prereq.sh
 $DIR/argocd.sh
 $DIR/loadbalancer.sh
+$DIR/wait-minio.sh
 $DIR/push-image.sh
