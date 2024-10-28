@@ -31,6 +31,9 @@ jobs:
       - name: Run argocd
         run: |
           ./argocd.sh
+      - name: Wait for minio
+        run: |
+          ./wait-minio.sh
       - name: Create load balancer
         run: |
           ./loadbalancer.sh
