@@ -27,6 +27,8 @@ kubectl run  s5cmd  --image=peakcom/s5cmd \
   --env S3_ENDPOINT_URL=https://minio.minio:443 \
   --command -- sleep infinity
 
+kubectl wait pod/s5cmd --for=condition=Ready --timeout=-1s
+
 while true
 do
   kubectl exec -it  s5cmd -- /s5cmd --log debug --no-verify-ssl ls "s3://harbor/*"
