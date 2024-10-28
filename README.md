@@ -29,17 +29,13 @@ sudo apt install socat podman
 ./prereq.sh
 
 # Install Minio
-./argocd.sh
-
 # Install and configure nginx-controller
-./install_nginx.sh
+# Install and configure Harbor
+./argocd.sh
 
 # Configure load-balancer
 ./loadbalancer.sh
 
-# Install and configure Harbor
-# Display connection information
-./install_harbor.sh
 ```
 
 
