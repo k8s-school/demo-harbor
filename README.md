@@ -35,7 +35,6 @@ sudo apt install socat podman
 
 # Configure load-balancer
 ./loadbalancer.sh
-
 ```
 
 
