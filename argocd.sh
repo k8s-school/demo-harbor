@@ -30,7 +30,7 @@ argocd app sync -l app.kubernetes.io/part-of=harbor-registry
 while true
 do
   ink "Wait for minio s3 endpoint to be ready"
-  endpoints=$(kubectl get svc minio -n minio -o jsonpath='{.subsets[0].addresses[*].ip}')
+  endpoints=$(kubectl get endpoints minio -n minio -o jsonpath='{.subsets[*].addresses[*].ip}')
   if [ "$endpoints" ]; then
     break
   fi
