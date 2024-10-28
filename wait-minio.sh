@@ -31,7 +31,7 @@ kubectl wait pod/s5cmd --for=condition=Ready --timeout=-1s
 
 while true
 do
-  if kubectl exec -it  s5cmd -- /s5cmd --log debug --no-verify-ssl ls "s3://harbor/*"
+  if kubectl exec s5cmd -- /s5cmd --log debug --no-verify-ssl ls "s3://harbor/*"
   then
     break
   else
