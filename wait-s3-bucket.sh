@@ -31,7 +31,7 @@ kubectl wait pod/s5cmd --for=condition=Ready --timeout=-1s
 
 while true
 do
-  kubectl exec -it s5cmd -- /s5cmd --no-verify-ssl ls | grep harbor
+  kubectl exec s5cmd -- /s5cmd --no-verify-ssl ls | grep harbor
   if [ $? -eq 0 ];
   then
     break

@@ -35,9 +35,9 @@ jobs:
       #   uses: mxschmitt/action-tmate@v3
       #   with:
       #     detached: true
-      - name: Wait for minio
+      - name: Wait for S3 bucket
         run: |
-          ./wait-minio.sh
+          ./wait-s3-bucket.sh
       - name: Create load balancer
         run: |
           ./loadbalancer.sh
