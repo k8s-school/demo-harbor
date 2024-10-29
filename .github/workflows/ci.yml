@@ -31,13 +31,13 @@ jobs:
       - name: Run argocd
         run: |
           ./argocd.sh
-      - name: Wait for minio
-        run: |
-          ./wait-minio.sh
       - name: Setup tmate session
         uses: mxschmitt/action-tmate@v3
         with:
           detached: true
+      - name: Wait for minio
+        run: |
+          ./wait-minio.sh
       - name: Create load balancer
         run: |
           ./loadbalancer.sh
