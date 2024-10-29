@@ -31,10 +31,10 @@ jobs:
       - name: Run argocd
         run: |
           ./argocd.sh
-      - name: Setup tmate session
-        uses: mxschmitt/action-tmate@v3
-        with:
-          detached: true
+      # - name: Setup tmate session
+      #   uses: mxschmitt/action-tmate@v3
+      #   with:
+      #     detached: true
       - name: Wait for minio
         run: |
           ./wait-minio.sh
