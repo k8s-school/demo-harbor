@@ -37,13 +37,16 @@ sudo apt install socat podman
 ./loadbalancer.sh
 ```
 
-
 ## e2e tests
 
 ```bash
 # Create and push image
 ./push-image.sh
 ```
+
+## Interactive access to web portal
+
+Open a browser for URL https://core.harbor.domain and login with username "harbor" and password "Harbor12345"
 
 ## Interactive access to S3 storage
 
