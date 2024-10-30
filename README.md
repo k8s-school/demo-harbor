@@ -4,7 +4,7 @@ Harbor inside Kubernetes demo
 
 Harbor is exposed through ingress (`nginx-controller`) and store image in `minio` using `s3` protocol.
 
-![Harbor demo architecture](demo-harbor.png)
+![Harbor demo architecture](img/demo-harbor.png)
 
 ## Pre-requisites
 
@@ -47,6 +47,8 @@ sudo apt install socat podman
 ## Interactive access to web portal
 
 Open a browser for URL https://core.harbor.domain and login with username "harbor" and password "Harbor12345"
+
+![Harbor web portal](img/push-success.png)
 
 ## Interactive access to S3 storage
 
