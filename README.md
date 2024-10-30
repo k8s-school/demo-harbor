@@ -1,8 +1,8 @@
 # demo-harbor
 
-Harbor inside Kubernetes demo
+Demo for Harbor inside Kubernetes
 
-Harbor is exposed through ingress (`nginx-controller`) and store image in `minio` using `s3` protocol.
+Harbor is exposed through ingress (`nginx-controller`) and stores images in `minio` using `s3` protocol.
 
 ![Harbor demo architecture](img/demo-harbor.png)
 
