@@ -1,4 +1,4 @@
-ciux_version="v0.0.4-rc8"
+ciux_version="v0.0.4-rc10"
 
 ingress_ns="ingress-nginx"
 
